@@ -7,8 +7,6 @@ This project demonstrates the implementation of a **Stack** data structure in C+
 - [Implemented Functionalities](#implemented-functionalities)
 - [Time Complexity Analysis](#time-complexity-analysis)
 - [Handling Stack Overflow](#handling-stack-overflow)
-- [How to Compile and Run](#how-to-compile-and-run)
-- [Testing](#testing)
 
 ## Understanding the Stack
 
@@ -34,3 +32,10 @@ A Stack operates under the **LIFO** principle, which means:
 
 **Access/Search: O(n)**
 - Searching through or accessing a non-top element can require up to n operations, as it involves going through all the elements.
+
+## Handling Stack Overflow
+In this implementation, the stack is dynamic (using a linked list), so there is no strict size limit unless we specify one.
+
+For a fixed-size stack (implemented with an array):
+- You must track the number of elements in the stack.
+- Stack Overflow occurs when the number of elements exceeds the defined capacity of the stack. In such a scenario, the push operation should check if the stack is full before inserting a new element.
