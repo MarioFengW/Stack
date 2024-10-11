@@ -11,45 +11,54 @@ struct Node {
 };
 
 class Stack {
-    private: 
-        Node* topNode;
+private:
+    Node* topNode;
+    int maxSize;
+    int currentSize;
 
-    public:
-    Stack(): topNode(nullptr){}
-    
+public:
+    Stack() : topNode(nullptr), maxSize(100), currentSize(0) {}
+
+    Stack(int size): topNode(nullptr), maxSize(size), currentSize(0) {}
+
     void push(int value) {
-        Node* newNode = new Node(); 
-        newNode -> data = value;
-        newNode -> next = topNode;
-        topNode = newNode;
-
-    }
-    
-    void pop() {
-        if(isEmpty()) {
-            cout << "El Stack está vacio: " << endl;
+        if (currentSize >= maxSize) {
+            cout << "Error: Stack overflow. No se puede insertar el valor " << value << endl;
             return;
         }
-
-        Node* temp = topNode;
-        topNode = topNode -> next;
-        delete temp;
-
+        Node* newNode = new Node();
+        newNode->data = value;
+        newNode->next = topNode;
+        topNode = newNode;
+        currentSize++;
     }
-    
+
+    void pop() {
+        if (isEmpty()) {
+            cout << "Error: El Stack esta vacio." << endl;
+            return;
+        }
+        Node* temp = topNode;
+        topNode = topNode->next;
+        delete temp;
+        currentSize--;
+    }
+
     int top() {
-        if(isEmpty()) {
-            cout << "El Stack está vacio: " << endl;
+        if (isEmpty()) {
+            cout << "Error: El Stack esta vacio." << endl;
             return -1;
         }
-        return topNode -> data;
+        return topNode->data;
     }
 
     bool isEmpty() {
         return topNode == nullptr;
     }
 
+    bool isFull() {
+        return currentSize == maxSize;
+    }
 };
-
 
 #endif
